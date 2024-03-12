@@ -7,7 +7,7 @@ const movieController=require('../../controllers/movie.controller');
 
 const router=express.Router();
 
-router.get("/", movieController.getMovies);
-router.get('/:movieID', validate);
+router.get("/", movieController.getAllMovies);
+router.get('/:movieID', validate(movieValidation.getMovies), movieController.getMovies);
 
 module.exports=router;

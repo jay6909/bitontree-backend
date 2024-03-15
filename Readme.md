@@ -17,11 +17,11 @@ url/v1/movies/id - will show info on one movie
 
 put
 url/v1/movies/id - 
-body should have {title, pubYear, poster} inorder to change the movie data
+body should have {title, year, poster} inorder to change the movie data
 
 delete
 url/v1/movies/id - will delete the movie id passsed in url
 
 post
 url/v1/movies - will add movie
-body should have {title, pubYear, poster} inorder to change the movie data
+body should have {title, year, poster} inorder to change the movie data

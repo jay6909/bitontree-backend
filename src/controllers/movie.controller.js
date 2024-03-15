@@ -83,9 +83,17 @@ const updateMovie = catchAsync(async (req, res) => {
 });
 
 const getMovies = catchAsync(async (req, res) => {
-  const movies = await movieService.getMovies(req.query.start, req.query.end);
+  const {limit, skip}=req.query
+  if(limit && skip){
+    const movies=await movieService.getLimitMovies(limit, skip);
+    return res.status(httpStatus.OK).send({ data: movies });
+
+  }
+ else{
+  const movies = await movieService.getMovies();
   
-  res.status(httpStatus.OK).send({ data: movies });
+  return res.status(httpStatus.OK).send({ data: movies });
+ }
 });
 
 const deleteMovie = catchAsync(async (req, res) => {

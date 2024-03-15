@@ -9,9 +9,30 @@ const path = require("path");
 /**
  * @returns {Promise<Movie>}
  */
-const getMovies=async(start, end)=>{
-    const movies=await Movie.find().skip(start).limit(end-1).exec()
-    return movies;
+const getLimitMovies=async(skip, limit)=>{
+    // const  skip = Number(skip);
+    const movies=await Movie.find().skip(skip).limit(limit).exec()
+    return movies
+
+    
+}
+
+
+/**
+ * @returns {Promise<Movie>}
+ */
+const getMovies=async()=>{
+    // const  skip = Number(skip);
+    try {
+        const movies=await Movie.find();
+   return movies
+        
+    } catch (error) {
+        console.log(error)
+        throw new ApiError(500, error)
+    }
+
+    
 }
 /**
  * @param {title} movie title
@@ -114,5 +135,5 @@ const deleteMovie=async(movieId)=>{
 }
 
 module.exports={
-    addMovie, updateMovie, deleteMovie, getMovies, getMovieById,
+    addMovie, updateMovie, deleteMovie, getMovies, getMovieById,getLimitMovies
 }

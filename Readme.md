@@ -6,13 +6,13 @@ req body needs to have email, password: greater than 6 chars
 
 to login:
 url/v1/auth/login
-req body needs to have email, password, upon successful login, server will send a bearer token, save it on localStorage or cookie
+req body needs to have email, password, upon successful login, server will slimit a bearer token, save it on localStorage or cookie
 
 
 server requests for movies/ needs auth token recieved when logged in using previous request
 get
 url/v1/movies - will show all movies 
-with query params start & end you can limit how much data we want from server
+with query params skip & limit you can limit how much data we want from server
 url/v1/movies/id - will show info on one movie
 
 put

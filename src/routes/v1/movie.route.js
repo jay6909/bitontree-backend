@@ -1,13 +1,33 @@
-const express=require('express');
-const validate=require('../../middlewares/validate');
-const userValidation=require('../../validations/user.validation');
-const movieValidation=require('../../validations/movie.validation');
+const express = require("express");
 
-const movieController=require('../../controllers/movie.controller');
+const auth = require("../../middlewares/auth");
 
-const router=express.Router();
+const validate = require("../../middlewares/validate");
+const movieValidation = require("../../validations/movie.validation");
 
-router.get("/", movieController.getAllMovies);
-router.get('/:movieID', validate(movieValidation.getMovies), movieController.getMovies);
+const movieController = require("../../controllers/movie.controller");
 
-module.exports=router;
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "uploads");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.filename + "-" + Date.now());
+//   },
+// });
+
+// const upload = multer({ storage });
+
+const router = express.Router();
+router.get("/filter", auth, validate(movieValidation.getFilteredMovies), movieController.getFilteredMovies);
+
+router.get("/:movieId", auth, validate(movieValidation.getMovieById), movieController.getMovieById);
+
+router.get("/", auth, movieController.getMovies);
+
+router.post('/', auth, validate(movieValidation.addMovie), movieController.addMovie);
+router.put("/:movieId", auth, validate(movieValidation.updateMovie), movieController.updateMovie);
+
+router.delete('/:movieId',auth, validate(movieValidation.deleteMovie), movieController.deleteMovie);
+
+module.exports = router;

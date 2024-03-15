@@ -6,7 +6,7 @@ const {User}=require("../models");
 
 const jwtOptions={
     secretOrKey:config.jwt.secret,
-    jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken('authorization',)
+    jwtFromRequest:ExtractJwt.fromAuthHeaderAsBearerToken('authorization')
 };
 
 
@@ -18,7 +18,7 @@ const jwtVerify=async(payload, done)=>{
     if(payload.type!==tokenTypes.ACCESS) done("Invalid token type");
     if(!payload.sub) done(null, false);
     const user =await User.findById(payload.sub);
-    if(!user) done("not found",flase);
+    if(!user) done("not found",false);
     done(null, user);
 };
 

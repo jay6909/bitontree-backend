@@ -9,6 +9,6 @@ router.use("/users", userRoute);
 //rpite all auth routes here
 router.use('/auth', authRoute);
 
-router.use('movies', movieRoute);
+router.use('/movies', movieRoute);
 
 module.exports=router

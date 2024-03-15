@@ -18,7 +18,7 @@ app.use(express.json());
 
 //parse urlencoded req body
 
-app.use(express.urlencoded({extended:true}));
+// app.use(express.urlencoded({extended:true}));
 
 //gzip compression
 app.use(compression());
